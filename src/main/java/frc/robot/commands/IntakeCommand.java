@@ -1,19 +1,33 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.subsystems.IntakeSubsystem;
 
-// Command to pull fuel inside the robot
-public Command intakeCommand() {
-  return new InstantCommand(() -> intakeSubsystem.runIntake(0.8), intakeSubsystem);
-}
+public class IntakeCommand extends Command {
 
-// Command to eject fuel out of the intake
-public Command ejectCommand() {
-  return new InstantCommand(() -> intakeSubsystem.runIntake(-0.5), intakeSubsystem);
-}
+    private final IntakeSubsystem intaker;
 
-// Command to stop the intake
-public Command stopCommand() {
-  return new InstantCommand(() -> intakeSubsystem.stop(), intakeSubsystem);
-}
+    public ShootCommand(IntakeSubsystem intaker) {
+        this.intaker = intaker;
+        addRequirements(intaker);
+    }
+
+    @Override
+    public void initialize() {
+        intaker.intake();
+    }
+
+    @Override
+    public void execute() {
+
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        intaker.stopIntake();
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
