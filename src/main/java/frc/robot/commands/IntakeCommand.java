@@ -7,7 +7,7 @@ public class IntakeCommand extends Command {
 
     private final IntakeSubsystem intaker;
 
-    public ShootCommand(IntakeSubsystem intaker) {
+    public IntakeCommand(IntakeSubsystem intaker) {
         this.intaker = intaker;
         addRequirements(intaker);
     }
